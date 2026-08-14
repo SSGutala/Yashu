@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bharatnatyam Album | YASHU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 35%, #680643 0%, #3d052b 40%, #1e021e 80%, #0d010e 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Back Button */
+    .back-btn-container {
+      margin-bottom: 3rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.8rem 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+    }
+
+    .back-btn:hover {
+      color: #ffffff;
+      background: #680643;
+      border-color: #680643;
+      transform: translateX(-5px);
+      box-shadow: 0 10px 20px rgba(104, 6, 67, 0.4);
+    }
+
+    /* Title Block */
+    .album-header {
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .album-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .album-subtitle {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    /* Image Gallery Grid */
+    .gallery-grid {
+      column-count: 3;
+      column-gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-grid {
+        column-count: 1;
+      }
+    }
+
+    .gallery-item {
+      position: relative;
+      break-inside: avoid;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(104, 6, 67, 0.3);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.03);
+    }
+
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 1, 14, 0.96);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+      display: flex;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      color: rgba(255, 255, 255, 0.6);
+      background: none;
+      border: none;
+      font-size: 3rem;
+      font-weight: 200;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      color: #ffffff;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1010;
+      user-select: none;
+    }
+
+    .lightbox-nav:hover {
+      background: #ffffff;
+      color: #0d010e;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-prev {
+      left: 3rem;
+    }
+
+    .lightbox-next {
+      right: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+      }
+      .lightbox-prev {
+        left: 1rem;
+      }
+      .lightbox-next {
+        right: 1rem;
+      }
+    }
+
+    .lightbox-content {
+      max-width: 85%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform: scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-caption {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Back Button -->
+    <div class="back-btn-container">
+      <a href="index.html#portfolio" class="back-btn">&#10094; Back to Portfolio</a>
+    </div>
+
+    <!-- Header -->
+    <header class="album-header">
+      <h1 class="album-title">Bharatnatyam Dance</h1>
+      <p class="album-subtitle">Classical Performance & Expressive Showcase</p>
+    </header>
+
+    <!-- Gallery Grid -->
+    <main class="gallery-grid">
+      <div class="gallery-item" data-index="0">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.18.18 PM.png" alt="Dance Performance 1" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="1">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.19.54 PM.png" alt="Dance Performance 2" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="2">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.20.05 PM.png" alt="Dance Performance 3" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="3">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.20.14 PM.png" alt="Dance Performance 4" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="4">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.20.21 PM.png" alt="Dance Performance 5" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="5">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.20.28 PM.png" alt="Dance Performance 6" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="6">
+        <img src="Portfolio/Dance/Screenshot 2026-08-06 at 3.20.36 PM.png" alt="Dance Performance 7" class="gallery-img">
+      </div>
+      <div class="gallery-item" data-index="7">
+        <img src="Portfolio/Dance/Yashu-P5.png" alt="Dance Performance 8" class="gallery-img">
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Previous Image">&#10094;</button>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="Next Image">&#10095;</button>
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const closeBtn = document.querySelector('.lightbox-close');
+      const prevBtn = document.querySelector('.lightbox-prev');
+      const nextBtn = document.querySelector('.lightbox-next');
+
+      const images = Array.from(items).map(item => item.querySelector('img').src);
+      let currentIndex = 0;
+
+      const updateLightbox = () => {
+        lightboxImg.src = images[currentIndex];
+        lightboxCaption.textContent = `Image ${currentIndex + 1} of ${images.length}`;
+      };
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          currentIndex = parseInt(item.getAttribute('data-index'), 10);
+          updateLightbox();
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+        });
+      });
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+      };
+
+      const nextImage = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightbox();
+      };
+
+      const prevImage = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightbox();
+      };
+
+      closeBtn.addEventListener('click', closeLightbox);
+      nextBtn.addEventListener('click', nextImage);
+      prevBtn.addEventListener('click', prevImage);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            closeLightbox();
+          } else if (e.key === 'ArrowRight') {
+            nextImage();
+          } else if (e.key === 'ArrowLeft') {
+            prevImage();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

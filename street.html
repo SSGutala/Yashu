@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High Fashion Album | YASHU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 35%, #680643 0%, #3d052b 40%, #1e021e 80%, #0d010e 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 4rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Back Button */
+    .back-btn-container {
+      margin-bottom: 3rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.8rem 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+    }
+
+    .back-btn:hover {
+      color: #ffffff;
+      background: #680643;
+      border-color: #680643;
+      transform: translateX(-5px);
+      box-shadow: 0 10px 20px rgba(104, 6, 67, 0.4);
+    }
+
+    /* Title Block */
+    .album-header {
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .album-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .album-subtitle {
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    /* Image Gallery Grid */
+    .gallery-grid {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .gallery-item {
+      max-width: 500px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 35px 60px rgba(104, 6, 67, 0.4);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .coming-soon-banner {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Back Button -->
+    <div class="back-btn-container">
+      <a href="index.html#portfolio" class="back-btn">&#10094; Back to Portfolio</a>
+    </div>
+
+    <!-- Header -->
+    <header class="album-header">
+      <h1 class="album-title">High Fashion</h1>
+      <p class="album-subtitle">Casual Showcase & High Fashion Photography</p>
+    </header>
+
+    <!-- Gallery Grid -->
+    <main class="gallery-grid">
+      <div class="gallery-item">
+        <img src="Portfolio/Screenshot 2026-08-06 at 3.30.54 PM.png" alt="Street Series Cover" class="gallery-img">
+      </div>
+    </main>
+
+    <div class="coming-soon-banner">
+      <p>More images coming soon...</p>
+    </div>
+  </div>
+
+</body>
+</html>
